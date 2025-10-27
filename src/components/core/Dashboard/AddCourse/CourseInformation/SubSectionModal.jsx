@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createSubSection, updateSubSection } from '../../../../../services/operations/courseDetailsAPI'
+import { createSubsection, updateSubsection } from '../../../../../services/operations/courseDetailsAPI'
 import { useDispatch, useSelector } from 'react-redux'
 
 import IconBtn from '../../../../common/IconBtn'
@@ -11,7 +11,7 @@ import { setCourse } from '../../../../../slices/courseSlice' // ✅ Make sure t
 import { toast } from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 
-export default function SubSectionModal({
+export default function SubsectionModal({
   modalData,
   setModalData,
   add = false,
@@ -58,14 +58,14 @@ export default function SubSectionModal({
     return false
   }
 
-  // handle the editing of subsection
+  // handle the editing of Subsection
   const handleEditSubsection = async () => {
     const currentValues = getValues()
     // console.log("changes after editing form values:", currentValues)
     const formData = new FormData()
     // console.log("Values After Editing form values:", currentValues)
     formData.append("sectionId", modalData.sectionId)
-    formData.append("subSectionId", modalData._id)
+    formData.append("SubsectionId", modalData._id)
     if (currentValues.lectureTitle !== modalData.title) {
       formData.append("title", currentValues.lectureTitle)
     }
@@ -76,7 +76,7 @@ export default function SubSectionModal({
       formData.append("video", currentValues.lectureVideo)
     }
     setLoading(true)
-    const result = await updateSubSection(formData, token)
+    const result = await updateSubsection(formData, token)
     if (result) {
       // console.log("result", result)
       // update the structure of course
@@ -109,7 +109,7 @@ export default function SubSectionModal({
     formData.append("description", data.lectureDesc)
     formData.append("video", data.lectureVideo)
     setLoading(true)
-    const result = await createSubSection(formData, token)
+    const result = await createSubsection(formData, token)
     if (result) {
       // update the structure of course
       const updatedCourseContent = course.courseContent.map((section) =>

@@ -11,7 +11,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
   const [videoBarActive, setVideoBarActive] = useState("")
   const navigate = useNavigate()
   const location = useLocation()
-  const { sectionId, subSectionId } = useParams()
+  const { sectionId, SubsectionId } = useParams()
   const {
     courseSectionData,
     courseEntireData,
@@ -25,15 +25,15 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
       const currentSectionIndx = courseSectionData.findIndex(
         (data) => data._id === sectionId
       )
-      const currentSubSectionIndx = courseSectionData?.[
+      const currentSubsectionIndx = courseSectionData?.[
         currentSectionIndx
-      ]?.subSection.findIndex((data) => data._id === subSectionId)
-      const activeSubSectionId =
-        courseSectionData[currentSectionIndx]?.subSection?.[
-          currentSubSectionIndx
+      ]?.Subsection.findIndex((data) => data._id === SubsectionId)
+      const activeSubsectionId =
+        courseSectionData[currentSectionIndx]?.Subsection?.[
+          currentSubsectionIndx
         ]?._id
       setActiveStatus(courseSectionData?.[currentSectionIndx]?._id)
-      setVideoBarActive(activeSubSectionId)
+      setVideoBarActive(activeSubsectionId)
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseSectionData, courseEntireData, location.pathname])
@@ -80,7 +80,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
                 </div>
                 <div className="flex items-center gap-3">
                   {/* <span className="text-[12px] font-medium">
-                    Lession {course?.subSection.length}
+                    Lession {course?.Subsection.length}
                   </span> */}
                   <span
                     className={`${
@@ -97,7 +97,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               {/* Sub Sections */}
               {activeStatus === course?._id && (
                 <div className="transition-[height] duration-500 ease-in-out">
-                  {course.subSection.map((topic, i) => (
+                  {course.Subsection.map((topic, i) => (
                     <div
                       className={`flex gap-3  px-5 py-2 ${
                         videoBarActive === topic._id

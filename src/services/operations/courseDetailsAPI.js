@@ -11,11 +11,11 @@ const {
   CREATE_COURSE_API,
   EDIT_COURSE_API,
   CREATE_SECTION_API,
-  CREATE_SUBSECTION_API,
+  CREATE_Subsection_API,
   UPDATE_SECTION_API,
-  UPDATE_SUBSECTION_API,
+  UPDATE_Subsection_API,
   DELETE_SECTION_API,
-  DELETE_SUBSECTION_API,
+  DELETE_Subsection_API,
   GET_ALL_INSTRUCTOR_COURSES_API,
   DELETE_COURSE_API,
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
@@ -149,12 +149,12 @@ export const createSection = async (data, token) => {
   return result
 }
 
-// create a subsection
-export const createSubSection = async (data, token) => {
+// create a Subsection
+export const createSubsection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("POST", CREATE_SUBSECTION_API, data, {
+    const response = await apiConnector("POST", CREATE_Subsection_API, data, {
       Authorization: `Bearer ${token}`,
     })
     console.log("CREATE SUB-SECTION API RESPONSE............", response)
@@ -193,12 +193,12 @@ export const updateSection = async (data, token) => {
   return result
 }
 
-// update a subsection
-export const updateSubSection = async (data, token) => {
+// update a Subsection
+export const updateSubsection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("POST", UPDATE_SUBSECTION_API, data, {
+    const response = await apiConnector("POST", UPDATE_Subsection_API, data, {
       Authorization: `Bearer ${token}`,
     })
     console.log("UPDATE SUB-SECTION API RESPONSE............", response)
@@ -236,12 +236,12 @@ export const deleteSection = async (data, token) => {
   toast.dismiss(toastId)
   return result
 }
-// delete a subsection
-export const deleteSubSection = async (data, token) => {
+// delete a Subsection
+export const deleteSubsection = async (data, token) => {
   let result = null
   const toastId = toast.loading("Loading...")
   try {
-    const response = await apiConnector("POST", DELETE_SUBSECTION_API, data, {
+    const response = await apiConnector("POST", DELETE_Subsection_API, data, {
       Authorization: `Bearer ${token}`,
     })
     console.log("DELETE SUB-SECTION API RESPONSE............", response)

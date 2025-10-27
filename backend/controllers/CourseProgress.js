@@ -1,18 +1,18 @@
 const mongoose = require("mongoose")
 const Section = require("../models/Section")
-const SubSection = require("../models/SubSection")
+const Subsection = require("../models/Subsection")
 const CourseProgress = require("../models/CourseProgress")
 const Course = require("../models/Course")
 
 exports.updateCourseProgress = async (req, res) => {
-  const { courseId, subsectionId } = req.body
+  const { courseId, SubsectionId } = req.body
   const userId = req.user.id
 
   try {
-    // Check if the subsection is valid
-    const subsection = await SubSection.findById(subsectionId)
-    if (!subsection) {
-      return res.status(404).json({ error: "Invalid subsection" })
+    // Check if the Subsection is valid
+    const Subsection = await Subsection.findById(SubsectionId)
+    if (!Subsection) {
+      return res.status(404).json({ error: "Invalid Subsection" })
     }
 
     // Find the course progress document for the user and course
@@ -28,13 +28,13 @@ exports.updateCourseProgress = async (req, res) => {
         message: "Course progress Does Not Exist",
       })
     } else {
-      // If course progress exists, check if the subsection is already completed
-      if (courseProgress.completedVideos.includes(subsectionId)) {
+      // If course progress exists, check if the Subsection is already completed
+      if (courseProgress.completedVideos.includes(SubsectionId)) {
         return res.status(400).json({ error: "Subsection already completed" })
       }
 
-      // Push the subsection into the completedVideos array
-      courseProgress.completedVideos.push(subsectionId)
+      // Push the Subsection into the completedVideos array
+      courseProgress.completedVideos.push(SubsectionId)
     }
 
     // Save the updated course progress
@@ -77,7 +77,7 @@ exports.updateCourseProgress = async (req, res) => {
 //     console.log(courseProgress, userId)
 //     let lectures = 0
 //     courseProgress.courseID.courseContent?.forEach((sec) => {
-//       lectures += sec.subSection.length || 0
+//       lectures += sec.Subsection.length || 0
 //     })
 
 //     let progressPercentage =

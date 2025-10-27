@@ -5,11 +5,11 @@ const sectionSchema = new mongoose.Schema({
 	sectionName: {
 		type: String,
 	},
-	subSection: [
+	Subsection: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			required: true,
-			ref: "SubSection",
+			ref: "Subsection",
 		},
 	],
 });

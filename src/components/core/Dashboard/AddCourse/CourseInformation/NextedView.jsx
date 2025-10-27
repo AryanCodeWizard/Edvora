@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { deleteSection, deleteSubSection } from '../../../../../services/operations/courseDetailsAPI'
+import { deleteSection, deleteSubsection } from '../../../../../services/operations/courseDetailsAPI'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AiFillCaretDown } from 'react-icons/ai'
@@ -9,7 +9,7 @@ import { FaPlus } from 'react-icons/fa'
 import { MdEdit } from 'react-icons/md'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { RxDropdownMenu } from 'react-icons/rx'
-import SubSectionModal from './SubSectionModal'
+import SubsectionModal from './SubsectionModal'
 import { TiPlus } from 'react-icons/ti'
 import { setCourse } from '../../../../../slices/courseSlice'
 
@@ -18,9 +18,9 @@ export default function NestedView({ handleChangeEditSectionName }) {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   // States to keep track of mode of modal [add, view, edit]
-  const [addSubSection, setAddSubsection] = useState(null)
-  const [viewSubSection, setViewSubSection] = useState(null)
-  const [editSubSection, setEditSubSection] = useState(null)
+  const [addSubsection, setAddSubsection] = useState(null)
+  const [viewSubsection, setViewSubsection] = useState(null)
+  const [editSubsection, setEditSubsection] = useState(null)
   // to keep track of confirmation modal
   const [confirmationModal, setConfirmationModal] = useState(null)
 
@@ -36,8 +36,8 @@ export default function NestedView({ handleChangeEditSectionName }) {
     setConfirmationModal(null)
   }
 
-  const handleDeleteSubSection = async (subSectionId, sectionId) => {
-    const result = await deleteSubSection({ subSectionId, sectionId, token })
+  const handleDeleteSubsection = async (SubsectionId, sectionId) => {
+    const result = await deleteSubsection({ SubsectionId, sectionId, token })
     if (result) {
       // update the structure of course
       const updatedCourseContent = course.courseContent.map((section) =>
@@ -97,10 +97,10 @@ export default function NestedView({ handleChangeEditSectionName }) {
             </summary>
             <div className="px-6 pb-4">
               {/* Render All Sub Sections Within a Section */}
-              {section.subSection.map((data) => (
+              {section.Subsection.map((data) => (
                 <div
                   key={data?._id}
-                  onClick={() => setViewSubSection(data)}
+                  onClick={() => setViewSubsection(data)}
                   className="flex cursor-pointer items-center justify-between gap-x-3 border-b-2 border-b-richblack-600 py-2"
                 >
                   <div className="flex items-center gap-x-3 py-2 ">
@@ -115,7 +115,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                   >
                     <button
                       onClick={() =>
-                        setEditSubSection({ ...data, sectionId: section._id })
+                        setEditSubsection({ ...data, sectionId: section._id })
                       }
                     >
                       <MdEdit className="text-xl text-richblack-300" />
@@ -128,7 +128,7 @@ export default function NestedView({ handleChangeEditSectionName }) {
                           btn1Text: "Delete",
                           btn2Text: "Cancel",
                           btn1Handler: () =>
-                            handleDeleteSubSection(data._id, section._id),
+                            handleDeleteSubsection(data._id, section._id),
                           btn2Handler: () => setConfirmationModal(null),
                         })
                       }
@@ -151,22 +151,22 @@ export default function NestedView({ handleChangeEditSectionName }) {
         ))}
       </div>
       {/* Modal Display */}
-      {addSubSection ? (
-        <SubSectionModal
-          modalData={addSubSection}
+      {addSubsection ? (
+        <SubsectionModal
+          modalData={addSubsection}
           setModalData={setAddSubsection}
           add={true}
         />
-      ) : viewSubSection ? (
-        <SubSectionModal
-          modalData={viewSubSection}
-          setModalData={setViewSubSection}
+      ) : viewSubsection ? (
+        <SubsectionModal
+          modalData={viewSubsection}
+          setModalData={setViewSubsection}
           view={true}
         />
-      ) : editSubSection ? (
-        <SubSectionModal
-          modalData={editSubSection}
-          setModalData={setEditSubSection}
+      ) : editSubsection ? (
+        <SubsectionModal
+          modalData={editSubsection}
+          setModalData={setEditSubsection}
           edit={true}
         />
       ) : (

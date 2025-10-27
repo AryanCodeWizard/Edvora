@@ -71,7 +71,7 @@ function CourseDetails() {
   useEffect(() => {
     let lectures = 0
     response?.data?.courseDetails?.courseContent?.forEach((sec) => {
-      lectures += sec.subSection.length || 0
+      lectures += sec.Subsection.length || 0
     })
     setTotalNoOfLectures(lectures)
   }, [response])

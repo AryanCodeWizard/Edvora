@@ -1,6 +1,6 @@
 const Section = require("../models/Section");
 const Course = require("../models/Course");
-const SubSection = require("../models/SubSection");
+const Subsection = require("../models/Subsection");
 // CREATE a new section
 exports.createSection = async (req, res) => {
 	try {
@@ -31,7 +31,7 @@ exports.createSection = async (req, res) => {
 			.populate({
 				path: "courseContent",
 				populate: {
-					path: "subSection",
+					path: "Subsection",
 				},
 			})
 			.exec();
@@ -66,7 +66,7 @@ exports.updateSection = async (req, res) => {
 		.populate({
 			path:"courseContent",
 			populate:{
-				path:"subSection",
+				path:"Subsection",
 			},
 		})
 		.exec();
@@ -105,7 +105,7 @@ exports.deleteSection = async (req, res) => {
 		}
 
 		//delete sub section
-		await SubSection.deleteMany({_id: {$in: section.subSection}});
+		await Subsection.deleteMany({_id: {$in: section.Subsection}});
 
 		await Section.findByIdAndDelete(sectionId);
 
@@ -113,7 +113,7 @@ exports.deleteSection = async (req, res) => {
 		const course = await Course.findById(courseId).populate({
 			path:"courseContent",
 			populate: {
-				path: "subSection"
+				path: "Subsection"
 			}
 		})
 		.exec();
