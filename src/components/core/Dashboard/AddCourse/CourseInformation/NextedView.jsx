@@ -9,7 +9,7 @@ import { FaPlus } from 'react-icons/fa'
 import { MdEdit } from 'react-icons/md'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { RxDropdownMenu } from 'react-icons/rx'
-import SubsectionModal from './SubsectionModal'
+import SubsectionModal from './SubSectionModal'
 import { TiPlus } from 'react-icons/ti'
 import { setCourse } from '../../../../../slices/courseSlice'
 

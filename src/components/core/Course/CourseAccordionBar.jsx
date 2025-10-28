@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 import { AiOutlineDown } from "react-icons/ai"
-import CourseSubsectionAccordion from "./CourseSubsectionAccordion"
+import CourseSubsectionAccordion from "./CourseSubSectionAccordion"
 
 export default function CourseAccordionBar({ course, isActive, handleActive }) {
   const contentEl = useRef(null)
