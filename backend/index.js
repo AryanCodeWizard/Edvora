@@ -67,15 +67,18 @@
 // });
 
 import { cloudinaryConnect } from "./config/cloudinary.js";
+// ---------------- Imports ----------------
+import { connect } from "./config/database.js";
 import contactUsRoute from "./routes/Contact.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import courseRoutes from "./routes/Course.js";
-import database from "./config/database.js";
+// import database from "./config/database.js";
+// import {connect} from "./config/database.js";
 import dotenv from "dotenv";
-// ---------------- Imports ----------------
 import express from "express";
 import fileUpload from "express-fileupload";
+// import paymentRoutes from "./routes/Payment.js";
 import paymentRoutes from "./routes/Payment.js";
 import profileRoutes from "./routes/Profile.js";
 import serverless from "serverless-http";
@@ -88,7 +91,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // ---------------- Database Connect ----------------
-database.connect();
+connect();
 
 // ---------------- Middlewares ----------------
 app.use(express.json());

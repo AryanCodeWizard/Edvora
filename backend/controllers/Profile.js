@@ -1,13 +1,19 @@
-const Profile = require("../models/Profile")
-const CourseProgress = require("../models/CourseProgress")
-
-const Course = require("../models/Course")
-const User = require("../models/User")
-const { uploadImageToCloudinary } = require("../utils/imageUploader")
-const mongoose = require("mongoose")
-const { convertSecondsToDuration } = require("../utils/secToDuration")
+// const Course = require("../models/Course")
+import Course from "../models/Course.js";
+// const CourseProgress = require("../models/CourseProgress")
+import CourseProgress from "../models/CourseProgress.js";
+// const Profile = require("../models/Profile")
+import Profile from "../models/Profile.js";
+// const User = require("../models/User")
+import User from "../models/User.js";
+// const { convertSecondsToDuration } = require("../utils/secToDuration")
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
+// const mongoose = require("mongoose")
+import mongoose from "mongoose";
+// const { uploadImageToCloudinary } = require("../utils/imageUploader")
+import { uploadImageToCloudinary } from "../utils/imageUploader.js";
 // Method for updating a profile
-exports.updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
   try {
     const {
       firstName = "",
@@ -57,7 +63,7 @@ exports.updateProfile = async (req, res) => {
   }
 }
 
-exports.deleteAccount = async (req, res) => {
+export const deleteAccount = async (req, res) => {
   try {
     const id = req.user.id
     console.log(id)
@@ -94,7 +100,7 @@ exports.deleteAccount = async (req, res) => {
   }
 }
 
-exports.getAllUserDetails = async (req, res) => {
+export const getAllUserDetails = async (req, res) => {
   try {
     const id = req.user.id
     const userDetails = await User.findById(id)
@@ -114,7 +120,7 @@ exports.getAllUserDetails = async (req, res) => {
   }
 }
 
-exports.updateDisplayPicture = async (req, res) => {
+export const updateDisplayPicture = async (req, res) => {
   try {
     const displayPicture = req.files.displayPicture
     const userId = req.user.id
@@ -143,7 +149,7 @@ exports.updateDisplayPicture = async (req, res) => {
   }
 }
 
-exports.getEnrolledCourses = async (req, res) => {
+export const getEnrolledCourses = async (req, res) => {
   try {
     const userId = req.user.id
     let userDetails = await User.findOne({
@@ -237,7 +243,7 @@ exports.getEnrolledCourses = async (req, res) => {
 //   }
 // }
 
-exports.instructorDashboard = async (req, res) => {
+export const instructorDashboard = async (req, res) => {
   try {
     // Fetch all courses for the logged-in instructor
     const courseDetails = await Course.find({ instructor: req.user.id });

@@ -1,13 +1,14 @@
+import User from "../models/User.js";
+import dotenv from "dotenv";
 // Importing required modules
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-const User = require("../models/User");
+import jwt from "jsonwebtoken";
+
 // Configuring dotenv to load environment variables from .env file
 dotenv.config();
 
 // This function is used as middleware to authenticate user requests
 
-exports.auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
   try {
     // Extract token from Authorization header only (preferred)
     const authHeader = req.headers.authorization;
@@ -34,7 +35,7 @@ exports.auth = async (req, res, next) => {
   }
 };
 
-exports.isStudent = async (req, res, next) => {
+export const isStudent = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
 
@@ -54,7 +55,7 @@ exports.isStudent = async (req, res, next) => {
 		})
 	}
 };
-exports.isAdmin = async (req, res, next) => {
+export const isAdmin = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
 
@@ -72,7 +73,7 @@ exports.isAdmin = async (req, res, next) => {
 	}
 };
 //Todo
-exports.isTester = async({req,res,next}) =>{
+export const isTester = async({req,res,next}) =>{
 	try{
 
 	}
@@ -85,7 +86,7 @@ exports.isTester = async({req,res,next}) =>{
 	}
 
 }
-exports.isInstructor = async (req, res, next) => {
+export const isInstructor = async (req, res, next) => {
 	try {
 		const userDetails = await User.findOne({ email: req.user.email });
 		console.log(userDetails);

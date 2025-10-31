@@ -1,15 +1,22 @@
-const Course = require("../models/Course");
-const Category = require("../models/Category");
-const Section = require("../models/Section");
-const Subsection = require("../models/SubSection");
-const User = require("../models/User");
-const { uploadImageToCloudinary } = require("../utils/imageUploader");
-const CourseProgress = require("../models/CourseProgress");
-const { convertSecondsToDuration } = require("../utils/secToDuration");
-
+// const Category = require("../models/Category");
+import Category from "../models/Category.js";
+// const Course = require("../models/Course");
+import Course from "../models/Course.js";
+// const CourseProgress = require("../models/CourseProgress");
+import CourseProgress from "../models/CourseProgress.js";
+// const Section = require("../models/Section");
+import Section from "../models/Section.js";
+// const Subsection = require("../models/SubSection");
+import Subsection from "../models/SubSection.js";
+// const User = require("../models/User");
+import User from "../models/User.js";
+// const { convertSecondsToDuration } = require("../utils/secToDuration");
+import { convertSecondsToDuration } from "../utils/secToDuration.js";
+// const { uploadImageToCloudinary } = require("../utils/imageUploader");
+import { uploadImageToCloudinary } from "../utils/imageUploader.js";
 
 // Function to create a new course
-exports.createCourse = async (req, res) => {
+export const createCourse = async (req, res) => {
   try {
     // Get user ID from request object
     const userId = req.user.id
@@ -134,7 +141,7 @@ exports.createCourse = async (req, res) => {
   }
 }
 // Edit Course Details
-exports.editCourse = async (req, res) => {
+export const editCourse = async (req, res) => {
   try {
     const { courseId } = req.body;
     const updates = req.body;
@@ -200,7 +207,7 @@ exports.editCourse = async (req, res) => {
   }
 }
 // Get Course List
-exports.getAllCourses = async (req, res) => {
+export const getAllCourses = async (req, res) => {
   try {
     const allCourses = await Course.find(
       { status: "Published" },
@@ -281,7 +288,7 @@ exports.getAllCourses = async (req, res) => {
 //     })
 //   }
 // }
-exports.getCourseDetails = async (req, res) => {
+export const getCourseDetails = async (req, res) => {
   try {
     const { courseId } = req.body
     const courseDetails = await Course.findOne({
@@ -342,7 +349,7 @@ exports.getCourseDetails = async (req, res) => {
     })
   }
 }
-exports.getFullCourseDetails = async (req, res) => {
+export const getFullCourseDetails = async (req, res) => {
   try {
     const { courseId } = req.body
     const userId = req.user.id
@@ -415,7 +422,7 @@ exports.getFullCourseDetails = async (req, res) => {
 }
 
 // Get a list of Course for a given Instructor
-exports.getInstructorCourses = async (req, res) => {
+export const getInstructorCourses = async (req, res) => {
   try {
     // Get the instructor ID from the authenticated user or request body
     const instructorId = req.user.id
@@ -440,7 +447,7 @@ exports.getInstructorCourses = async (req, res) => {
   }
 }
 // Delete the Course
-exports.deleteCourse = async (req, res) => {
+export const deleteCourse = async (req, res) => {
   try {
     const { courseId } = req.body
 

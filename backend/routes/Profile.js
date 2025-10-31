@@ -1,14 +1,26 @@
-const express = require("express")
-const router = express.Router()
-const { auth, isInstructor } = require("../middlewares/auth")
-const {
+// const { auth, isInstructor } = require("../middlewares/auth")
+import { auth, isInstructor } from "../middlewares/auth.js"
+// const {
+//   deleteAccount,
+//   updateProfile,
+//   getAllUserDetails,
+//   updateDisplayPicture,
+//   getEnrolledCourses,
+//   instructorDashboard,
+// } = require("../controllers/Profile")
+import {
   deleteAccount,
-  updateProfile,
   getAllUserDetails,
-  updateDisplayPicture,
   getEnrolledCourses,
   instructorDashboard,
-} = require("../controllers/Profile")
+  updateDisplayPicture,
+  updateProfile,
+} from "../controllers/Profile.js";
+
+// const express = require("express")
+import express from "express"
+
+const router = express.Router()
 
 // ********************************************************************************************************
 //                                      Profile routes
@@ -22,4 +34,4 @@ router.get("/getEnrolledCourses", auth, getEnrolledCourses)
 router.put("/updateDisplayPicture", auth, updateDisplayPicture)
 router.get("/instructorDashboard", auth, isInstructor, instructorDashboard)
 
-module.exports = router
+export default router

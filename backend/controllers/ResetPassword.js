@@ -1,9 +1,13 @@
-const User = require("../models/User");
-const mailSender = require("../utils/mailSender");
-const bcrypt = require("bcryptjs");
-const crypto = require("crypto");
+// const User = require("../models/User");
+import User from "../models/User.js";
+// const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
+// const crypto = require("crypto");
+import crypto from "crypto";
+// const mailSender = require("../utils/mailSender");
+import mailSender from "../utils/mailSender.js";
 
-exports.resetPasswordToken = async (req, res) => {
+export const resetPasswordToken = async (req, res) => {
 	try {
 		const email = req.body.email;
 		const user = await User.findOne({ email: email });
@@ -47,7 +51,7 @@ exports.resetPasswordToken = async (req, res) => {
 	}
 };
 
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
 	try {
 		const { password, confirmPassword, token } = req.body;
 

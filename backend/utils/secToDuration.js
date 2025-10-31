@@ -13,6 +13,7 @@ function convertSecondsToDuration(totalSeconds) {
     }
   }
   
-  module.exports = {
-    convertSecondsToDuration,
-  }
+  // module.exports = {
+  //   convertSecondsToDuration,
+  // }
+  export { convertSecondsToDuration };

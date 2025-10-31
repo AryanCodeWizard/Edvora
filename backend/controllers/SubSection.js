@@ -1,10 +1,12 @@
 // Import necessary modules
-const Section = require("../models/Section")
-const Subsection = require("../models/SubSection")
-const { uploadImageToCloudinary } = require("../utils/imageUploader")
-
+// const Section = require("../models/Section")
+import Section from "../models/Section.js";
+// const Subsection = require("../models/SubSection")
+import Subsection from "../models/SubSection.js";
+// const { uploadImageToCloudinary } = require("../utils/imageUploader")
+import { uploadImageToCloudinary } from "../utils/imageUploader.js";
 // Create a new sub-section for a given section
-exports.createSubsection = async (req, res) => {
+export const createSubsection = async (req, res) => {
   try {
     // Extract necessary information from the request body
     const { sectionId, title, description } = req.body
@@ -52,7 +54,7 @@ exports.createSubsection = async (req, res) => {
   }
 }
 
-exports.updateSubsection = async (req, res) => {
+export const updateSubsection = async (req, res) => {
   try {
     const { sectionId, SubsectionId, title, description } = req.body
     const Subsection = await Subsection.findById(SubsectionId)
@@ -104,7 +106,7 @@ exports.updateSubsection = async (req, res) => {
   }
 }
 
-exports.deleteSubsection = async (req, res) => {
+export const deleteSubsection = async (req, res) => {
   try {
     const { SubsectionId, sectionId } = req.body
     await Section.findByIdAndUpdate(

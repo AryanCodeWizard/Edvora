@@ -1,10 +1,12 @@
-const { Mongoose } = require("mongoose");
-const Category = require("../models/Category");
+import Category from "../models/Category.js";
+// const { Mongoose } = require("mongoose");
+import mongoose from "mongoose";
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max)
   }
 
-exports.createCategory = async (req, res) => {
+export const createCategory = async (req, res) => {
 	try {
 		const { name, description } = req.body;
 		if (!name) {
@@ -29,7 +31,7 @@ exports.createCategory = async (req, res) => {
 	}
 };
 
-exports.showAllCategories = async (req, res) => {
+export const showAllCategories = async (req, res) => {
 	try {
         console.log("INSIDE SHOW ALL CATEGORIES");
 		const allCategorys = await Category.find({});
@@ -47,7 +49,7 @@ exports.showAllCategories = async (req, res) => {
 
 //categoryPageDetails 
 
-exports.categoryPageDetails = async (req, res) => {
+export const categoryPageDetails = async (req, res) => {
     try {
       const { categoryId } = req.body
       console.log("PRINTING CATEGORY ID: ", categoryId);

@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+// Import mongoose
+import mongoose from "mongoose";
 
 const SubSectionSchema = new mongoose.Schema({
 	title: { type: String },
@@ -7,4 +8,5 @@ const SubSectionSchema = new mongoose.Schema({
 	videoUrl: { type: String },
 });
 
-module.exports = mongoose.model("Subsection", SubSectionSchema);
+// module.exports = mongoose.model("Subsection", SubSectionSchema);
+export default mongoose.model("Subsection", SubSectionSchema);
