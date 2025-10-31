@@ -24,6 +24,7 @@ const coursesSchema = new mongoose.Schema({
 			ref: "RatingAndReview",
 		},
 	],
+	
 	price: {
 		type: Number,
 	},
@@ -58,6 +59,7 @@ const coursesSchema = new mongoose.Schema({
 		default:Date.now
 	},
 });
+// async funct
 
 // Export the Courses model
 module.exports = mongoose.model("Course", coursesSchema);
