@@ -62,10 +62,11 @@ app.get("/", (req, res) => {
 });
 
 // ---------------- Start Server ----------------
-app.listen(PORT, () => {
-  console.log(`App is running at ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`App is running at ${PORT}`);
+// });
 
-
+import serverless from "serverless-http";
+export const handler = serverless(app);
 
 
