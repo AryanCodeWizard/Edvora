@@ -67,6 +67,7 @@ export const sendotp = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message })
   }
 }
+// export const testing = 
 
 // Signup Controller for Registering USers
 export const signup = async (req, res) => {
@@ -113,6 +114,7 @@ export const signup = async (req, res) => {
         message: "User already exists. Please sign in to continue.",
       })
     }
+    // i
 
     // Find the most recent OTP for the email
     const response = await OTP.find({ email }).sort({ createdAt: -1}).limit(1)
