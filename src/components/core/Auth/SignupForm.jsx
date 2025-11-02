@@ -13,9 +13,7 @@ function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // student or instructor
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,10 +24,10 @@ function SignupForm() {
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { firstName, lastName, email, password, confirmPassword } = formData
 
-  // Handle input fields, when some value changes
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -37,172 +35,207 @@ function SignupForm() {
     }))
   }
 
-  // Handle Form Submission
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
 
     if (password !== confirmPassword) {
-      toast.error("Passwords Do Not Match")
+      toast.error("Passwords do not match")
+      setIsSubmitting(false)
       return
     }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long")
+      setIsSubmitting(false)
+      return
+    }
+
     const signupData = {
       ...formData,
       accountType,
     }
 
-    // Setting signup data to state
-    // To be used after otp verification
-    dispatch(setSignupData(signupData))
-    // Send OTP to user for verification
-    dispatch(sendOtp(formData.email, navigate))
-
-    // Reset
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    })
-    setAccountType(ACCOUNT_TYPE.STUDENT)
+    try {
+      dispatch(setSignupData(signupData))
+      await dispatch(sendOtp(formData.email, navigate))
+      
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      })
+      setAccountType(ACCOUNT_TYPE.STUDENT)
+    } catch (error) {
+      toast.error("Signup failed. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
-  // data to pass to Tab component
   const tabData = [
     {
       id: 1,
-      tabName: "Student",
+      tabName: "🎓 Student",
       type: ACCOUNT_TYPE.STUDENT,
     },
     {
       id: 2,
-      tabName: "Instructor",
+      tabName: "👨‍🏫 Instructor",
       type: ACCOUNT_TYPE.INSTRUCTOR,
     },
   ]
 
   return (
-    <div>
-      {/* Tab */}
-      <Tab tabData={tabData} field={accountType} setField={setAccountType} />
+    <div className="space-y-6 ml-5">
+      {/* Account Type Selection */}
+      <div className="text-center mb-2">
+        <h3 className="text-richblack-50 font-semibold mb-3">I am joining as a:</h3>
+        <Tab tabData={tabData} field={accountType} setField={setAccountType} />
+      </div>
+
       {/* Form */}
-      <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
-        <div className="flex gap-x-4">
-          <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              First Name <sup className="text-pink-200">*</sup>
-            </p>
+      <form onSubmit={handleOnSubmit} className="space-y-5">
+        {/* Name Fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="flex items-center text-sm font-medium text-richblack-50">
+              First Name <span className="text-pink-400 ml-1">*</span>
+            </label>
             <input
               required
               type="text"
               name="firstName"
               value={firstName}
               onChange={handleOnChange}
-              placeholder="Enter first name"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+              placeholder="Enter your first name"
+              className="w-full px-4 py-3 bg-richblack-700 border border-richblack-600 rounded-xl text-richblack-5 placeholder-richblack-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-50 focus:border-transparent hover:bg-richblack-600"
             />
-          </label>
-          <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Last Name <sup className="text-pink-200">*</sup>
-            </p>
+          </div>
+          
+          <div className="space-y-2">
+            <label className="flex items-center text-sm font-medium text-richblack-50">
+              Last Name <span className="text-pink-400 ml-1">*</span>
+            </label>
             <input
               required
               type="text"
               name="lastName"
               value={lastName}
               onChange={handleOnChange}
-              placeholder="Enter last name"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+              placeholder="Enter your last name"
+              className="w-full px-4 py-3 bg-richblack-700 border border-richblack-600 rounded-xl text-richblack-5 placeholder-richblack-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-50 focus:border-transparent hover:bg-richblack-600"
             />
-          </label>
+          </div>
         </div>
-        <label className="w-full">
-          <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-            Email Address <sup className="text-pink-200">*</sup>
-          </p>
+
+        {/* Email Field */}
+        <div className="space-y-2">
+          <label className="flex items-center text-sm font-medium text-richblack-50">
+            Email Address <span className="text-pink-400 ml-1">*</span>
+          </label>
           <input
             required
-            type="text"
+            type="email"
             name="email"
             value={email}
             onChange={handleOnChange}
-            placeholder="Enter email address"
-            style={{
-              boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-            }}
-            className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+            placeholder="Enter your email address"
+            className="w-full px-4 py-3 bg-richblack-700 border border-richblack-600 rounded-xl text-richblack-5 placeholder-richblack-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-50 focus:border-transparent hover:bg-richblack-600"
           />
-        </label>
-        <div className="flex gap-x-4">
-          <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Create Password <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={password}
-              onChange={handleOnChange}
-              placeholder="Enter Password"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
-            />
-            <span
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-            >
-              {showPassword ? (
-                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-              ) : (
-                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-              )}
-            </span>
-          </label>
-          <label className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Confirm Password <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleOnChange}
-              placeholder="Confirm Password"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-10 text-richblack-5"
-            />
-            <span
-              onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
-            >
-              {showConfirmPassword ? (
-                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
-              ) : (
-                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
-              )}
-            </span>
-          </label>
         </div>
+
+        {/* Password Fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="flex items-center text-sm font-medium text-richblack-50">
+              Create Password <span className="text-pink-400 ml-1">*</span>
+            </label>
+            <div className="relative">
+              <input
+                required
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={password}
+                onChange={handleOnChange}
+                placeholder="Enter your password"
+                className="w-full px-4 py-3 pr-12 bg-richblack-700 border border-richblack-600 rounded-xl text-richblack-5 placeholder-richblack-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-50 focus:border-transparent hover:bg-richblack-600"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-richblack-400 hover:text-richblack-100 transition-colors duration-200"
+              >
+                {showPassword ? (
+                  <AiOutlineEyeInvisible size={20} />
+                ) : (
+                  <AiOutlineEye size={20} />
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="flex items-center text-sm font-medium text-richblack-50">
+              Confirm Password <span className="text-pink-400 ml-1">*</span>
+            </label>
+            <div className="relative">
+              <input
+                required
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleOnChange}
+                placeholder="Confirm your password"
+                className="w-full px-4 py-3 pr-12 bg-richblack-700 border border-richblack-600 rounded-xl text-richblack-5 placeholder-richblack-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-50 focus:border-transparent hover:bg-richblack-600"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-richblack-400 hover:text-richblack-100 transition-colors duration-200"
+              >
+                {showConfirmPassword ? (
+                  <AiOutlineEyeInvisible size={20} />
+                ) : (
+                  <AiOutlineEye size={20} />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+          disabled={isSubmitting}
+          className="w-full bg-gradient-to-r from-yellow-50 to-yellow-100 hover:from-yellow-100 hover:to-yellow-200 text-richblack-900 font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
         >
-          Create Account
+          {isSubmitting ? (
+            <>
+              <div className="w-5 h-5 border-2 border-richblack-900 border-t-transparent rounded-full animate-spin"></div>
+              <span>Creating Account...</span>
+            </>
+          ) : (
+            <span>Create Account 🚀</span>
+          )}
         </button>
       </form>
+
+      {/* Additional Info */}
+      <div className="text-center pt-4 border-t border-richblack-600">
+        <p className="text-richblack-300 text-sm">
+          By signing up, you agree to our{" "}
+          <a href="#" className="text-yellow-50 hover:underline font-medium">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="#" className="text-yellow-50 hover:underline font-medium">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
     </div>
   )
 }
