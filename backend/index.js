@@ -23,24 +23,24 @@ const PORT = process.env.PORT || 4000;
 connect();
 
 // ---------------- ✅ GLOBAL CORS ----------------
-// app.use((req, res, next) => {
-//   // res.header("Access-Control-Allow-Origin", "https://edvora-hazel.vercel.app");
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, OPTIONS"
-//   );
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Requested-With"
-//   );
-//   res.header("Access-Control-Allow-Credentials", "true");
+app.use((req, res, next) => {
+  // res.header("Access-Control-Allow-Origin", "https://edvora-hazel.vercel.app");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
 
-//   if (req.method === "OPTIONS") {
-//     return res.sendStatus(200);
-//   }
-//   next();
-// });
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(
 	cors({
 		origin:"http://localhost:3000",
