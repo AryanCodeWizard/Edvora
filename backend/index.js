@@ -112,7 +112,7 @@ connect();
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3000/",
-  "https://edvora-hazel.vercel.app", // deployed frontend (Vercel)
+  "edvora-beryl.vercel.app", // deployed frontend (Vercel)
 ];
 
 app.use(
