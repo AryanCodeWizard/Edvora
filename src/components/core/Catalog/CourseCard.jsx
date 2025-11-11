@@ -1,6 +1,4 @@
 import {
-  BsBookmark,
-  BsBookmarkFill,
   BsClock,
   BsFire,
   BsPeople,
@@ -8,15 +6,15 @@ import {
   BsShieldCheck,
   BsStarFill
 } from 'react-icons/bs'
-import { FiBarChart2, FiCheckCircle } from 'react-icons/fi'
-import { IoRibbon, IoSparkles, IoTimer } from 'react-icons/io5'
-import { Link, Navigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import { IoRibbon, IoTimer } from 'react-icons/io5'
+import { useEffect, useState } from 'react'
 
+import { FiCheckCircle } from 'react-icons/fi'
 import GetAvgRating from '../../../utils/avgRating'
-import RatingStars from '../../common/RatingStars'
+import { Link } from 'react-router-dom'
+// import RatingStars from '../../common/RatingStars'
 import { motion } from 'framer-motion'
-import { use } from 'react'
+// import { use } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const CourseCard = ({ course, Height, index }) => {
@@ -29,18 +27,18 @@ const CourseCard = ({ course, Height, index }) => {
     setAvgReviewCount(count)
   }, [course])
 
-  const handleBookmark = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsBookmarked(!isBookmarked)
-  }
+  // const handleBookmark = (e) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   setIsBookmarked(!isBookmarked)
+  // }
   const navigate=useNavigate()
 
   const difficultyLevel = course?.difficulty || 'Beginner'
   const totalStudents = course?.studentsEnrolled?.length || 1247
-  const totalLessons = course?.courseContent?.reduce((acc, section) => 
-    acc + (section?.Subsection?.length || 0), 0
-  ) || 24
+  // const totalLessons = course?.courseContent?.reduce((acc, section) => 
+  //   acc + (section?.Subsection?.length || 0), 0
+  // ) || 24
 
   // Calculate discount
   const originalPrice = Math.round(course?.price * 1.5)

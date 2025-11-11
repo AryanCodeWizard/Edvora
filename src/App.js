@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { ACCOUNT_TYPE } from './utils/constants'
 import About from './pages/About'
@@ -8,9 +7,9 @@ import AllCourses from './pages/AllCourses'
 import Cart from './components/core/Dashboard/Cart/Cart'
 import Catalog from './pages/Catalog'
 import Contact from './pages/ContactUs'
-import ContactUs from './pages/ContactUs'
+// import ContactUs from './pages/ContactUs'
 import CookiePolicy from './pages/CookiePolicy'
-import CourseDetail from './pages/CourseDetail'
+// import CourseDetail from './pages/CourseDetail'
 import CourseDetails from './pages/CourseDetail'
 import Dashboard from './pages/Dashboard'
 import EditCourse from './components/core/Dashboard/EditCourse/EditCourse'
@@ -27,7 +26,7 @@ import Navbar from './components/common/Navbar'
 import OpenRoute from './components/core/Auth/OpenRoute'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import PrivateRoute from './components/core/Auth/PrivateRoute'
-import React from 'react'
+// import React from 'react'
 import Settings from './components/core/Dashboard/Settings/ index'
 import Signup from './pages/Signup'
 import Terms from './pages/Terms'
@@ -35,12 +34,16 @@ import UpdatePassword from './pages/UpdatePassword'
 import VerifyEmail from './pages/VerifyEmail'
 import VideoDetails from './components/core/ViewCourse/VideoDetails'
 import ViewCourse from '../src/pages/ViewCourse'
-import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+// import { useDispatch, useSelector } from 'react-redux'
+
+// import { useNavigate } from 'react-router-dom'
 
 function App() {
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   
   const { user } = useSelector((state) => state.profile)
 

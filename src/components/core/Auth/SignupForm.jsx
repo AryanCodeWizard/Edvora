@@ -227,13 +227,13 @@ function SignupForm() {
       <div className="text-center pt-4 border-t border-richblack-600">
         <p className="text-richblack-300 text-sm">
           By signing up, you agree to our{" "}
-          <a href="#" className="text-yellow-50 hover:underline font-medium">
+          <button href="#" className="text-yellow-50 hover:underline font-medium">
             Terms of Service
-          </a>{" "}
+          </button>{" "}
           and{" "}
-          <a href="#" className="text-yellow-50 hover:underline font-medium">
+          <button href="#" className="text-yellow-50 hover:underline font-medium">
             Privacy Policy
-          </a>
+          </button>
         </p>
       </div>
     </div>

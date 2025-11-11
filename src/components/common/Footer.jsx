@@ -1,11 +1,12 @@
-import { FaFacebook, FaGithub, FaGoogle, FaHeart, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaHeart, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 
 import { FiArrowUpRight } from "react-icons/fi";
-import { FooterLink2 } from "../../data/footer-links";
+// import { FooterLink2 } from "../../data/footer-links";
 import { Link } from "react-router-dom";
+
 // Images
-import Logo from "../../assets/Logo/Edvora.png";
-import React from "react";
+// import Logo from "../../assets/Logo/Edvora.png";
+// import React from "react";
 
 const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
 const Resources = [

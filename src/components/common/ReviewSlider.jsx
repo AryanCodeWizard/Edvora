@@ -18,7 +18,7 @@ function ReviewSlider() {
   const truncateWords = 25
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       try {
         setIsLoading(true)
         const { data } = await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API)
@@ -187,9 +187,13 @@ function ReviewSlider() {
             }}
           >
             {reviews.map((review, i) => (
-              <SwiperSlide key={i} className="opacity-0 animate-fadeInUp animation-delay-[${i * 100}ms]">
+              <SwiperSlide
+                key={i}
+                className={`opacity-0 animate-fadeInUp animation-delay-[${i * 100}ms]`}
+              >
                 <ReviewCard review={review} />
               </SwiperSlide>
+
             ))}
           </Swiper>
         ) : (
