@@ -1,22 +1,20 @@
+import 'dotenv/config'; // <-- ensure .env is loaded before other imports
+
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import { connect } from "./config/database.js";
 import contactUsRoute from "./routes/Contact.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import courseRoutes from "./routes/Course.js";
-import dotenv from "dotenv";
-// ---------------- Imports ----------------
 import express from "express";
 import fileUpload from "express-fileupload";
 import paymentRoutes from "./routes/Payment.js";
 import profileRoutes from "./routes/Profile.js";
 import serverless from "serverless-http";
 import tutorRoutes from "./routes/tutorRoutes.js";
-// ---------------- Routes ----------------
 import userRoutes from "./routes/User.js";
 
 // ---------------- Config ----------------
-dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
