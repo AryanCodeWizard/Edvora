@@ -78,6 +78,7 @@ const MyCourses = () => {
         }
         fetchCourses();
     }, [token])
+    // console.log("Course Information: ",courses);
 
     // Loading Skeleton
     if (loading) {

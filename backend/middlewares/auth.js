@@ -75,6 +75,21 @@ export const isAdmin = async (req, res, next) => {
 //Todo
 export const isTester = async({req,res,next}) =>{
 	try{
+		const userDetails = await User.findOne({email:req.user.email})
+
+		if(!userDetails){
+			res.statau(400).json({
+				success: false,
+				message: "User not found"
+			})
+		}
+		if(userDetails.accountType !=="Tester"){
+			return res.status(401).json({
+				success: false,
+				message: "You are not authorize as Tester kindly contact admin"
+			})
+		}
+
 
 	}
 	catch(err){

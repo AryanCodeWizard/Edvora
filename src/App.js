@@ -34,6 +34,7 @@ import UpdatePassword from './pages/UpdatePassword'
 import VerifyEmail from './pages/VerifyEmail'
 import VideoDetails from './components/core/ViewCourse/VideoDetails'
 import ViewCourse from '../src/pages/ViewCourse'
+import VirtualTeacher from './pages/VirtualTeacher'
 import { useSelector } from 'react-redux'
 
 // import { useDispatch, useSelector } from 'react-redux'
@@ -170,6 +171,7 @@ function App() {
 <Route path="cookie-policy" element={<CookiePolicy />} />
 <Route path="/terms" element={<Terms/>} />
 <Route path="all-courses" element={<AllCourses/>} />
+<Route path="/virtual-teacher" element={<VirtualTeacher />} />
 
     <Route path="*" element={<Error />} />
 
