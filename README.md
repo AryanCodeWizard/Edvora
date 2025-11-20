@@ -1,6 +1,12 @@
 
 # StudyNotion - EdTech Platform
-:rocket: [Link to website][https://studynotion-frontend.vercel.app/]
+:rocket: 🚀 Live Website: https://edvora-beryl.vercel.app
+🧪 Instructor Login:
+Email: aryan.singh766768@gmail.com
+Password: 123456
+👨‍🎓 Student Login:
+Email: shambhudhanpal@gmail.com
+Password: 123456
 
 
 ![Main Page](images/mainpage.png)
