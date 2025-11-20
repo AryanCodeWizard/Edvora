@@ -1,4 +1,4 @@
-# StudyNotion (Edvora) — EdTech Platform
+#  Edvora — EdTech Platform
 
 🚀 Live site: https://edvora-beryl.vercel.app
 
@@ -41,7 +41,7 @@ A full-stack EdTech platform for creating, consuming, and rating educational con
 ---
 
 ## About
-StudyNotion aims to simplify digital learning with:
+Edvora aims to simplify digital learning with:
 - High-quality courses (video + docs + markdown content)
 - Instructor tools to create/manage/sell courses
 - Student-facing features: wishlist, cart, course progress, ratings
@@ -214,4 +214,4 @@ For questions about the project or to request access to demo data, open an issue
 
 ---
 
-Thank you for using StudyNotion — happy building and learning!
+Thank you for using Edvora — happy building and learning!
