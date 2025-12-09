@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 
 import { COURSE_STATUS } from "../../../../../utils/constants"
-import IconBtn from "../../../../common/IconBtn"
 import { editCourseDetails } from "../../../../../services/operations/courseDetailsAPI"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
@@ -18,10 +17,13 @@ export default function PublishCourse() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    // sync checkbox with course status whenever course updates
     if (course?.status === COURSE_STATUS.PUBLISHED) {
       setValue("public", true)
+    } else {
+      setValue("public", false)
     }
-  }, [])
+  }, [course, setValue])
 
   const goBack = () => {
     dispatch(setStep(2))
@@ -94,7 +96,13 @@ export default function PublishCourse() {
           >
             Back
           </button>
-          <IconBtn disabled={loading} text="Save Changes" />
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex cursor-pointer items-center gap-x-2 rounded-md bg-yellow-50 py-[8px] px-[20px] font-semibold text-richblack-900 disabled:opacity-60"
+          >
+            {loading ? "Saving..." : "Save Changes"}
+          </button>
         </div>
       </form>
     </div>

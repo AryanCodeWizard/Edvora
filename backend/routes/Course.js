@@ -43,14 +43,6 @@ import { updateCourseProgress } from "../controllers/CourseProgress.js";
 const router = express.Router();
 
 // Import the Controllers
-
-
-
-
-
-
-
-
 // ********************************************************************************************************
 //                                      Course routes
 // ********************************************************************************************************

@@ -215,6 +215,7 @@ export const login = async (req, res) => {
       // Save token to user document in database
       user.token = token
       user.password = undefined
+      
       // Set cookie for token and return success response
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
@@ -289,8 +290,7 @@ export const changePassword = async (req, res) => {
       console.error("Error occurred while sending email:", error)
       return res.status(500).json({
         success: false,
-        message: "Error occurred while sending email",
-        error: error.message,
+        message: "Error occurred while sending notification email due to pasword update or chnage"
       })
     }
 

@@ -4,7 +4,6 @@ import { setCourse, setEditCourse, setStep } from '../../../../../slices/courseS
 import { useDispatch, useSelector } from 'react-redux'
 
 import { BiRightArrow } from 'react-icons/bi'
-import IconBtn from '../../../../common/IconBtn'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import { IoMdAddCircle } from 'react-icons/io'
 import { MdNavigateNext } from 'react-icons/md'
@@ -117,14 +116,14 @@ export default function CourseBuilderForm() {
           )}
         </div>
         <div className="flex items-end gap-x-4">
-          <IconBtn
+          <button
             type="submit"
             disabled={loading}
-            text={editSectionName ? "Edit Section Name" : "Create Section"}
-            outline={true}
+            className="flex items-center gap-x-2 rounded-md border border-richblack-600 py-[8px] px-[16px] font-semibold text-yellow-50 disabled:opacity-60"
           >
-            <IoAddCircleOutline size={20} className="text-yellow-50" />
-          </IconBtn>
+            <IoAddCircleOutline size={18} />
+            <span>{editSectionName ? "Edit Section Name" : "Create Section"}</span>
+          </button>
           {editSectionName && (
             <button
               type="button"
@@ -147,9 +146,15 @@ export default function CourseBuilderForm() {
         >
           Back
         </button>
-        <IconBtn disabled={loading} text="Next" onclick={goToNext}>
+        <button
+          type="button"
+          onClick={goToNext}
+          disabled={loading}
+          className="flex items-center gap-x-2 rounded-md bg-yellow-50 py-[8px] px-[20px] font-semibold text-richblack-900 disabled:opacity-60"
+        >
+          <span>Next</span>
           <MdNavigateNext />
-        </IconBtn>
+        </button>
       </div>
     </div>
   )

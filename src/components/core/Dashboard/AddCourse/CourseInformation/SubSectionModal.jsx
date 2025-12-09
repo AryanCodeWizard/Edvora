@@ -36,13 +36,13 @@ export default function SubsectionModal({
   const { course } = useSelector((state) => state.course)
 
   useEffect(() => {
-    if (view || edit) {
-      // console.log("modalData", modalData)
-      setValue("lectureTitle", modalData.title)
-      setValue("lectureDesc", modalData.description)
-      setValue("lectureVideo", modalData.videoUrl)
+    if (modalData && (view || edit)) {
+      // populate whenever modalData changes
+      setValue("lectureTitle", modalData.title || "")
+      setValue("lectureDesc", modalData.description || "")
+      setValue("lectureVideo", modalData.videoUrl || "")
     }
-  }, [])
+  }, [modalData, view, edit, setValue])
 
   // detect whether form is updated or not
   const isFormUpdated = () => {
@@ -189,10 +189,13 @@ export default function SubsectionModal({
           </div>
           {!view && (
             <div className="flex justify-end">
-              <IconBtn
+              <button
+                type="submit"
                 disabled={loading}
-                text={loading ? "Loading.." : edit ? "Save Changes" : "Save"}
-              />
+                className="flex items-center gap-x-2 rounded-md bg-yellow-50 py-[8px] px-[20px] font-semibold text-richblack-900 disabled:opacity-60"
+              >
+                {loading ? "Loading.." : edit ? "Save Changes" : "Save"}
+              </button>
             </div>
           )}
         </form>

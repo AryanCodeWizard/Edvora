@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 // Define the Courses schema
 const coursesSchema = new mongoose.Schema({
 	courseName: { type: String },
@@ -23,8 +22,7 @@ const coursesSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "RatingAndReview",
 		},
-	],
-	
+	],	
 	price: {
 		type: Number,
 	},

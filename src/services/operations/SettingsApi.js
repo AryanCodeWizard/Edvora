@@ -45,6 +45,7 @@ export function updateDisplayPicture(token, formData) {
 export function updateProfile(token, formData) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
+    console.log("Form Data in update profile service:", formData)
     try {
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
         Authorization: `Bearer ${token}`,

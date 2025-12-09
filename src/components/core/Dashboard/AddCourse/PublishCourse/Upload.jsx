@@ -1,6 +1,6 @@
 import "video-react/dist/video-react.css"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { FiUploadCloud } from "react-icons/fi"
 import { Player } from "video-react"
@@ -22,7 +22,6 @@ export default function Upload({
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
   )
-  const inputRef = useRef(null)
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0]
@@ -33,10 +32,10 @@ export default function Upload({
   }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: !video
-      ? { "image/*": [".jpeg", ".jpg", ".png"] }
-      : { "video/*": [".mp4"] },
+    // simpler/more permissive accept patterns; react-dropzone validates common types
+    accept: !video ? { "image/*": [] } : { "video/*": [] },
     onDrop,
+    multiple: false,
   })
 
   const previewFile = (file) => {
@@ -98,7 +97,7 @@ export default function Upload({
             className="flex w-full flex-col items-center p-6"
             {...getRootProps()}
           >
-            <input {...getInputProps()} ref={inputRef} />
+            <input {...getInputProps()} />
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>

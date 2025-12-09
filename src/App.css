@@ -244,3 +244,48 @@ details > summary::-webkit-details-marker {
 .section_heading {
   @apply text-2xl font-bold text-richblack-5 lg:text-4xl;
 }
+
+/* Add to your global CSS file */
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes tilt-reverse {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(-100%);
+    width: 10%;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    transform: translateX(200%);
+    width: 10%;
+  }
+}
+
+.animate-tilt {
+  animation: tilt 2s ease-in-out infinite;
+}
+
+.animate-tilt-reverse {
+  animation: tilt-reverse 2s ease-in-out infinite;
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-in-out infinite;
+}

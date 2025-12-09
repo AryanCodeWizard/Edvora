@@ -10,7 +10,6 @@ import { useEffect, useState } from "react"
 import { COURSE_STATUS } from "../../../../../utils/constants"
 import ChipInput from "./ChipInput"
 import { HiOutlineCurrencyRupee } from "react-icons/hi"
-import IconBtn from "../../../../common/IconBtn"
 import { MdNavigateNext } from "react-icons/md"
 import RequirementsField from "./RequirementField"
 import Upload from "../PublishCourse/Upload"
@@ -51,7 +50,8 @@ export default function CourseInformationForm() {
       setValue("coursePrice", course.price)
       setValue("courseTags", course.tag)
       setValue("courseBenefits", course.whatYouWillLearn)
-      setValue("courseCategory", course.category)
+      // store category id (select expects id value)
+      setValue("courseCategory", course.category?._id ?? "")
       setValue("courseRequirements", course.instructions)
       setValue("courseImage", course.thumbnail)
     }
@@ -62,16 +62,22 @@ export default function CourseInformationForm() {
 
   const isFormUpdated = () => {
     const currentValues = getValues()
-    // console.log("changes after editing form values:", currentValues)
+    // normalize values for safe comparison
+    const currentTags = currentValues.courseTags ?? []
+    const currentReqs = currentValues.courseRequirements ?? []
+    const currentCategoryId =
+      currentValues.courseCategory && typeof currentValues.courseCategory === "object"
+        ? currentValues.courseCategory._id
+        : currentValues.courseCategory
+
     if (
       currentValues.courseTitle !== course.courseName ||
       currentValues.courseShortDesc !== course.courseDescription ||
       currentValues.coursePrice !== course.price ||
-      currentValues.courseTags.toString() !== course.tag.toString() ||
+      currentTags.toString() !== (course.tag ?? []).toString() ||
       currentValues.courseBenefits !== course.whatYouWillLearn ||
-      currentValues.courseCategory._id !== course.category._id ||
-      currentValues.courseRequirements.toString() !==
-      course.instructions.toString() ||
+      currentCategoryId !== course.category?._id ||
+      currentReqs.toString() !== (course.instructions ?? []).toString() ||
       currentValues.courseImage !== course.thumbnail
     ) {
       return true
@@ -303,19 +309,22 @@ export default function CourseInformationForm() {
       <div className="flex justify-end gap-x-2">
         {editCourse && (
           <button
+            type="button"
             onClick={() => dispatch(setStep(2))}
             disabled={loading}
-            className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900`}
+            className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900"
           >
-            Continue Wihout Saving
+            Continue Without Saving
           </button>
         )}
-        <IconBtn
+        <button
+          type="submit"
           disabled={loading}
-          text={!editCourse ? "Next" : "Save Changes"}
+          className="flex cursor-pointer items-center gap-x-2 rounded-md bg-yellow-50 py-[8px] px-[20px] font-semibold text-richblack-900"
         >
+          <span>{!editCourse ? "Next" : "Save Changes"}</span>
           <MdNavigateNext />
-        </IconBtn>
+        </button>
       </div>
     </form>
   )

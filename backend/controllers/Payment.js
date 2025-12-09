@@ -91,7 +91,7 @@ export const capturePayment = async (req, res) => {
 
   let total_amount = 0;
 
-  for (const course_id of courses) {
+  for (const course_id of courses){
     let course;
     try {
       course = await Course.findById(course_id);
@@ -109,6 +109,7 @@ export const capturePayment = async (req, res) => {
         return res
           .status(200)
           .json({ success: false, message: "Student is already Enrolled" });
+          
       }
 
       total_amount += course.price;
