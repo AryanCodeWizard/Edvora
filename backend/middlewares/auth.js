@@ -1,12 +1,9 @@
 import User from "../models/User.js";
 import dotenv from "dotenv";
-// Importing required modules
 import jwt from "jsonwebtoken";
 
-// Configuring dotenv to load environment variables from .env file
 dotenv.config();
 
-// This function is used as middleware to authenticate user requests
 
 export const auth = async (req, res, next) => {
   try {

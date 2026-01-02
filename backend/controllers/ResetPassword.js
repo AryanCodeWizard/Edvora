@@ -1,10 +1,6 @@
-// const User = require("../models/User");
 import User from "../models/User.js";
-// const bcrypt = require("bcryptjs");
 import bcrypt from "bcryptjs";
-// const crypto = require("crypto");
 import crypto from "crypto";
-// const mailSender = require("../utils/mailSender");
 import mailSender from "../utils/mailSender.js";
 
 export const resetPasswordToken = async (req, res) => {

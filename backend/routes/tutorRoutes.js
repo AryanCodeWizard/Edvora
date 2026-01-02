@@ -1,4 +1,3 @@
-// 
 import {
   createVideoJobController,
   generateScriptController,

@@ -1,8 +1,5 @@
-// const Course = require("../models/Course");
 import Course from "../models/Course.js";
-// const Section = require("../models/Section");
 import Section from "../models/Section.js";
-// const Subsection = require("../models/SubSection");
 import Subsection from "../models/SubSection.js";
 // CREATE a new section
 export const createSection = async (req, res) => {

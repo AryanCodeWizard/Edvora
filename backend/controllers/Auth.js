@@ -1,39 +1,29 @@
-// const OTP = require("../models/OTP")
 import OTP from "../models/OTP.js";
-// const Profile = require("../models/Profile")
 import Profile from "../models/Profile.js"
-// const User = require("../models/User")
 import User from "../models/User.js"
-// const bcrypt = require("bcryptjs")
-// import bcrypt from "bcryptjs"
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv"
-// const jwt = require("jsonwebtoken")
 import jwt from "jsonwebtoken"
-// const mailSender = require("../utils/mailSender")
 import mailSender from "../utils/mailSender.js"
-// const otpGenerator = require("otp-generator")
 import otpGenerator from "otp-generator"
-// const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 import { passwordUpdated } from "../mail/templates/passwordUpdate.js"
 
-dotenv.config()
-// 
+dotenv.config();
 
-// Send OTP For Email Verification
+//Send OTP For Email Verification.............
 
 export const sendotp = async (req, res) => {
   try {
     const { email } = req.body
 
-    // Check if user is already present
-    // Find user with provided email
+    //Check if user is already present
+    //Find user with provided email
     const checkUserPresent = await User.findOne({ email })
-    // to be used in case of signup
+    //To be used in case of signup
 
-    // If user found with provided email
+    //If user found with provided email
     if (checkUserPresent) {
-      // Return 401 Unauthorized status code with error message
+      //Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
         message: `User is Already Registered`,
@@ -67,9 +57,8 @@ export const sendotp = async (req, res) => {
     return res.status(500).json({ success: false, error: error.message })
   }
 }
-// export const testing = 
 
-// Signup Controller for Registering USers
+//Signup Controller for Registering Users
 export const signup = async (req, res) => {
   try {
     // Destructure fields from the request body
@@ -102,7 +91,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({
         success: false,
         message:
-          "Password and Confirm Password do not match. Please try again.",
+          "Password and Confirm Password do not match. Please try again.....",
       })
     }
 
@@ -111,7 +100,7 @@ export const signup = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: "User already exists. Please sign in to continue.",
+        message: "User already exists. Please sign in to continue......",
       })
     }
     // i
@@ -136,7 +125,7 @@ export const signup = async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the user
     let approved = ""
@@ -170,39 +159,40 @@ export const signup = async (req, res) => {
     console.error(error)
     return res.status(500).json({
       success: false,
-      message: "User cannot be registered. Please try again.",
+      message: "User cannot be registered. Please try again.....",
     })
   }
 }
 
-// Login controller for authenticating users
+
+//Login controller for authenticating users
 export const login = async (req, res) => {
   try {
-    // Get email and password from request body
+    //Get email and password from request body
     const { email, password } = req.body
 
-    // Check if email or password is missing
+    //Check if email or password is missing
     if (!email || !password) {
-      // Return 400 Bad Request status code with error message
+      //Return 400 Bad Request status code with error message
       return res.status(400).json({
         success: false,
         message: `Please Fill up All the Required Fields`,
       })
     }
 
-    // Find user with provided email
+    //Find user with provided email
     const user = await User.findOne({ email }).populate("additionalDetails")
 
-    // If user not found with provided email
+    //If user not found with provided email
     if (!user) {
-      // Return 401 Unauthorized status code with error message
+      //Return 401 Unauthorized status code with error message
       return res.status(401).json({
         success: false,
         message: `User is not Registered with Us Please SignUp to Continue`,
       })
     }
 
-    // Generate JWT token and Compare Password
+    //Generate JWT token and Compare Password
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
         { email: user.email, id: user._id, role: user.role },
@@ -211,12 +201,12 @@ export const login = async (req, res) => {
           expiresIn: "24h",
         }
       )
-
-      // Save token to user document in database
+      //Save token to user document in database
       user.token = token
       user.password = undefined
       
-      // Set cookie for token and return success response
+      //Set cookie for token and return success response
+      
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
@@ -235,7 +225,7 @@ export const login = async (req, res) => {
     }
   } catch (error) {
     console.error(error)
-    // Return 500 Internal Server Error status code with error message
+    //Return 500 Internal Server Error status code with error message
     return res.status(500).json({
       success: false,
       message: `Login Failure Please Try Again`,
@@ -300,7 +290,7 @@ export const changePassword = async (req, res) => {
       .json({ success: true, message: "Password updated successfully" })
   } catch (error) {
     // If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
-    console.error("Error occurred while updating password:", error)
+    console.error("Error occurred while updating password: ", error)
     return res.status(500).json({
       success: false,
       message: "Error occurred while updating password",

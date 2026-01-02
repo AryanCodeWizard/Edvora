@@ -1,8 +1,5 @@
-// const Course = require("../models/Course");
 import Course from "../models/Course.js";
-// const RatingAndReview = require("../models/RatingAndReview");
 import RatingAndReview from "../models/RatingAndReview.js";
-// const { mongo, default: mongoose } = require("mongoose");
 import mongoose from "mongoose";
 
 //createRating

@@ -1,13 +1,4 @@
-// const { auth, isInstructor } = require("../middlewares/auth")
 import { auth, isInstructor } from "../middlewares/auth.js"
-// const {
-//   deleteAccount,
-//   updateProfile,
-//   getAllUserDetails,
-//   updateDisplayPicture,
-//   getEnrolledCourses,
-//   instructorDashboard,
-// } = require("../controllers/Profile")
 import {
   deleteAccount,
   getAllUserDetails,
@@ -17,7 +8,6 @@ import {
   updateProfile,
 } from "../controllers/Profile.js";
 
-// const express = require("express")
 import express from "express"
 
 const router = express.Router()

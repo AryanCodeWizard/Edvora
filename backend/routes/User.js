@@ -1,22 +1,7 @@
-// Import the required controllers and middleware functions
-// const {
-//   login,
-//   signup,
-//   sendotp,
-//   changePassword,
-// } = require("../controllers/Auth")
 import { changePassword, login, sendotp, signup } from "../controllers/Auth.js"
-//
-// const {
-//   resetPasswordToken,
-//   resetPassword,
-// } = require("../controllers/ResetPassword")
 import { resetPassword, resetPasswordToken } from "../controllers/ResetPassword.js"
 
-// const { auth } = require("../middlewares/auth")
 import { auth } from "../middlewares/auth.js"
-// Import the required modules
-// const express = require("express")
 import express from "express"
 
 const router = express.Router()

@@ -1,4 +1,4 @@
-import 'dotenv/config'; // <-- ensure .env is loaded before other imports
+import 'dotenv/config';
 
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import { connect } from "./config/database.js";

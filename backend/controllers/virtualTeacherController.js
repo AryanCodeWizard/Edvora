@@ -1,6 +1,5 @@
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
-import express from 'express';
 import { generateScript } from "../utils/llmClient.js";
 
 // ----------------- Generate Lesson Script -----------------

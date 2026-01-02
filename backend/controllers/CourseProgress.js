@@ -1,12 +1,7 @@
-// const Course = require("../models/Course")
 import Course from "../models/Course.js";
-// const CourseProgress = require("../models/CourseProgress")
 import CourseProgress from "../models/CourseProgress.js";
-// const Section = require("../models/Section")
 import Section from "../models/Section.js";
-// const Subsection = require("../models/SubSection")
 import Subsection from "../models/SubSection.js";
-// const mongoose = require("mongoose")
 import mongoose from "mongoose";
 
 export const updateCourseProgress = async (req, res) => {

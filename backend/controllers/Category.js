@@ -1,5 +1,4 @@
 import Category from "../models/Category.js";
-// const { Mongoose } = require("mongoose");
 import mongoose from "mongoose";
 
 function getRandomInt(max) {

@@ -1,18 +1,12 @@
-// const Course = require("../models/Course")
 import Course from "../models/Course.js";
-// const CourseProgress = require("../models/CourseProgress")
 import CourseProgress from "../models/CourseProgress.js";
-// const Profile = require("../models/Profile")
 import Profile from "../models/Profile.js";
-// const User = require("../models/User")
 import User from "../models/User.js";
-// const { convertSecondsToDuration } = require("../utils/secToDuration")
 import { convertSecondsToDuration } from "../utils/secToDuration.js";
-// const mongoose = require("mongoose")
 import mongoose from "mongoose";
-// const { uploadImageToCloudinary } = require("../utils/imageUploader")
 import { uploadImageToCloudinary } from "../utils/imageUploader.js";
 // Method for updating a profile
+
 export const updateProfile = async (req, res) => {
   try {
     const {
@@ -45,7 +39,8 @@ export const updateProfile = async (req, res) => {
     profile.gender = gender
 
     // Save the updated profile
-    await profile.save()
+    await profile.save();
+    
 
     // Find the updated user details
     const updatedUserDetails = await User.findById(id)
@@ -217,34 +212,6 @@ export const getEnrolledCourses = async (req, res) => {
     })
   }
 }
-
-// exports.instructorDashboard = async (req, res) => {
-//   try {
-//     const courseDetails = await Course.find({ instructor: req.user.id })
-
-//     const courseData = courseDetails.map((course) => {
-//       const totalStudentsEnrolled = course.studentsEnroled.length
-//       const totalAmountGenerated = totalStudentsEnrolled * course.price
-
-//       // Create a new object with the additional fields
-//       const courseDataWithStats = {
-//         _id: course._id,
-//         courseName: course.courseName,
-//         courseDescription: course.courseDescription,
-//         // Include other course properties as needed
-//         totalStudentsEnrolled,
-//         totalAmountGenerated,
-//       }
-
-//       return courseDataWithStats
-//     })
-
-//     res.status(200).json({ courses: courseData })
-//   } catch (error) {
-//     console.error(error)
-//     res.status(500).json({ message: "Server Error" })
-//   }
-// }
 
 export const instructorDashboard = async (req, res) => {
   try {
